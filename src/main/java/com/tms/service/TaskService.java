@@ -15,10 +15,13 @@ public class TaskService {
    @Autowired
    private TaskRepository taskRepository;
 
-    public List<Task> getAllTasks() {
+    public List<Task> getAllTasks(String search){
+    if(search!=null && !search.isEmpty()) {
+        return taskRepository.findByTitleContainingIgnoreCase(search);
+    }else{
         return taskRepository.findAll();
+        }
     }
-
     public Optional<Task> getTaskById(String id) {
         return taskRepository.findById(id);
     }

@@ -20,8 +20,8 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllTasks() {
-        return ResponseEntity.ok(taskService.getAllTasks());
+    public ResponseEntity<List<Task>> getAllTasks(@RequestParam (required=false) String search) {
+        return ResponseEntity.ok(taskService.getAllTasks(search));
     }
 
     @GetMapping("/{id}")
@@ -49,10 +49,6 @@ public class TaskController {
     @GetMapping("/filter")
     public ResponseEntity<List<Task>> filterTasks(@RequestParam String status) {
         return ResponseEntity.ok(taskService.filterTasksByStatus(status));
-    }
-    @GetMapping("/search")
-    public ResponseEntity<List<Task>> searchTasks(@RequestParam String title) {
-        return ResponseEntity.ok(taskService.searchTasksByTitle(title));
     }
 }
 
